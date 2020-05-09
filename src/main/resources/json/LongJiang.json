@@ -1,0 +1,46 @@
+{
+  "accounts": [
+    {
+      "host": "dev01-nfsp-ftp.nflow.cn",
+      "port": 222,
+      "username": "zjts",
+      "password": "nflow@2019"
+    },
+    {
+      "host": "222.171.150.132",
+      "port": 5210,
+      "username": "ljb_xinliu",
+      "password": "OMYFC5m9a7"
+    }
+  ],
+  "downloadConfig": {
+    "downloadPath": "/opt/data/zjts/uploadfile/demoFiles/longjiang/#{transDateBriefStr}/",
+    "secretAlgorithm": "RSA",
+    "secretKey": "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMFN5BCK2rLlJyX9Pmv4MNLxkERBo9TW95OCIp65fcUJkiuWEkxEPYRl1lZA455Ry2Jjd9Y+uc/ejHjj2d11LdGg9alMMLmTeU3W7v8eckD5g1kd+A8ND2AGpBDUsA85ePfl1OF06/4X6/lotbOLGruY0OvpQlFHu1+g6Cj0L0+LAgMBAAECgYBcTlSMrbG3YYOrOV3YcwDliiKo5WtVVH2Ou8LKZqsvLt3U4GnGb4OsuHB8aaoHzOlBB1yPOw7Bu3T6uVsszCrfLd1BvKeJa0+RZzd1ineN6LfwIsEd97MXx3e4nTqLN0A57b36/YxVl+2zvpm98xUM/6fYuq1hOYxn0F+fhOAtcQJBAOWQknWpcytiBcQsgvhSqEgUibJyyLlxyIzUO6oy7uCWLI0XHqyazK7BhNH3oLrhU2lW4jJIFd/7VsgB5GiRf3MCQQDXkGHX2fOwgJqtzPD2i+ZFpsnmn2eUqgm/uV5+9NkyhF5aiJEsXeVO3TAPhxLINz8p/0pkN6AauFNpanYD6LmJAkAA7aG5+hJuJXpSfb+V03e8uuCHqTEols4xy5XmLUiL/e92LpbAKewT9NJdqvuqZcjZjzFg9Kup+TEzo9ZRme0DAkAHvv11FzTli8mDI1EpWt+ccyDgM6wyMGYHSK73mu7PHOiTEkM9N+aMjfAzLqRjI3EWnkDbFxCexS7iI9w3yb4ZAkEAvbX/pF3IV+5Qwh0UA08GXxqceRj4Q1nEEE/BzdiPCiETxpG1tjZ1EyzlMtVldsLwpId/AUWW+tBzeSrpcV/KqA==",
+    "downloadFiles": [
+      "10_xinliu_payoutdetail_#{transDateBriefStr}.txt"
+    ]
+  },
+  "parseConfig": {
+    "minRowsNum": 4,
+    "minColumnsNum": 9,
+    "delimiter": "|",
+    "subtotalPosition": "head",
+    "subtotalIndex": 1,
+    "subtotalFieldMapNames": "accountNo1,accountNo2,transType,subTransType,totalNumber,totalAmount,totalFeeAmount,clearDate",
+    "dataFieldStart": 3,
+    "dataFieldEnd": 0,
+    "dataFieldEntities": [
+      {
+        "className": "cn.nflow.reconcile.domain.model.reconcile.BankLoan",
+        "dataFieldMapNames": "bankApplyNo,loanNo,handleDate,loanAmount,interestRate,loanTerm,userName,certNo,bankCardNo",
+        "dataFieldNewlyMapNames": "bankLoanStatus,bankChannel,merClearRemark",
+        "dataFieldHandleMethods": {
+          "bankChannel": "@cn.nflow.nfsp.common.entity.BatchChannelEnum@LJBC.getName()",
+          "bankLoanStatus": "#fieldValue,\"S\"",
+          "merClearRemark": "#fieldValue,\"\""
+        }
+      }
+    ]
+  }
+}

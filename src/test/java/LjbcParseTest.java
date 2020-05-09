@@ -18,22 +18,26 @@ import java.util.stream.Stream;
  */
 public class LjbcParseTest {
 
-    private static final String path = "/Users/edz/ljb_sftp/repay/";
-    private static final String parsePath = "/Users/edz/ljb_sftp/repay/parse/";
+//    private static final String path = "/Users/edz/ljb_sftp/repay/";
+//    private static final String path = "/Users/edz/ljb_sftp/claims/";
+    private static final String path = "/Users/edz/ljb_sftp/compensatory/";
+    private static final String parsePath = "/Users/edz/ljb_sftp/compensatory/parse/";
     private static final String privateKeyFilePath = "/Users/edz/workspace/simple/etc/private_key.p12";
     private static final String privateKeyPwd = "xinliu123";
+    private static final String bak = ".bak";
+    private static final String txt = ".txt";
 
     public static void main(String[] args) throws Exception {
         File file = new File(path);
         File[] files = file.listFiles();
         assert files != null;
         for (File f : files) {
-            if (!f.getName().endsWith(".txt")) {
+            if (!f.getName().endsWith(bak)) {
                 continue;
             }
-            decodeFile(f);
-            boolean b = f.renameTo(new File(f.getAbsolutePath() + ".bak"));
-//            boolean b = f.renameTo(new File(path + f.getName().replace(".bak", "")));
+//            decodeFile(f);
+//            boolean b = f.renameTo(new File(f.getAbsolutePath() + ".bak"));
+            boolean b = f.renameTo(new File(path + f.getName().replace(bak, "")));
         }
     }
 

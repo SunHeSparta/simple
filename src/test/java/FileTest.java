@@ -1,7 +1,5 @@
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
-import javax.xml.bind.Element;
 import java.io.*;
 
 /**
@@ -10,7 +8,10 @@ import java.io.*;
 public class FileTest {
 
     private static final String fromPath = "/Users/edz/ljb_sftp/10001";
-    private static final String toPath = "/Users/edz/ljb_sftp/repay/";
+//    private static final String toPath = "/Users/edz/ljb_sftp/repay/";
+    private static final String toPath = "/Users/edz/ljb_sftp/claims/";
+//    public static final String fileNameContains = "10_xinliu_repaydetail_202003";
+    public static final String fileNameContains = "10_xinliu_compensatorydetail";
 
     public static void main(String[] args) throws IOException {
         File file = new File(fromPath);
@@ -26,7 +27,7 @@ public class FileTest {
             for (File f : files) {
                 copyFiles(f);
             }
-        } else if (file.getName().contains("10_xinliu_repaydetail_202003")) {
+        } else if (file.getName().contains(fileNameContains)) {
             File fi = new File(toPath + file.getName());
             copyFileUsingFileStreams(file, fi);
         }
